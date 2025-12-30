@@ -1,9 +1,15 @@
-// Projects stack scroll animator
-// behavior: cards are stacked; as you scroll through the #projects section each top card slides off to the left
+/* GSAP-based stacking cards: pins the #projects section and makes each
+   .project-card leave the stack as the user scrolls. Uses ScrollTrigger.
+*/
 (function(){
-  function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+  function init(){
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined'){
+      console.warn('[projects-stack] GSAP or ScrollTrigger not found — aborting.');
+      return;
+    }
 
-  function setup() {
+    gsap.registerPlugin(ScrollTrigger);
+
     const section = document.querySelector('#projects');
     if (!section) return;
     const container = section.querySelector('.projects-box');
@@ -11,104 +17,126 @@
     const cards = Array.from(container.querySelectorAll('.project-card'));
     if (!cards.length) return;
 
-    // mark cards with data-index and base zIndex
+    // We'll initialize stacked visual after creating inner wrappers
+
+    // Build timeline where each card moves up & fades out in sequence
+    const totalDuration = Math.max(1, cards.length * 0.6);
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: () => `+=${window.innerHeight * (cards.length + 1)}`,
+        scrub: true,
+        pin: section,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+      }
+    });
+
+    // Sequence animations so each card only starts after the previous
+    // card has completed its swipe-off. We append two tweens per card
+    // (leave stack, then quick swipe off) in order on the timeline.
+    cards.forEach((c,i)=>{
+      const dir = (i % 2 === 0) ? -1 : 1; // even -> left, odd -> right
+      const leaveX = dir * (220 + i * 40);
+
+      // 1) move slightly out of the stack (no fade)
+      tl.to(c, {x: leaveX, ease: 'none', duration: 1});
+
+      // 2) swipe quickly off-screen in same direction — appended after the leave tween
+      tl.to(c, {
+        x: () => dir * (Math.max(window.innerWidth, 800) * 1.2),
+        ease: 'power2.in',
+        duration: 0.45
+      });
+    });
+
+    // Refresh layout on resize so ScrollTrigger end value is recalculated
+    window.addEventListener('resize', ()=> ScrollTrigger.refresh());
+
+    // --- Cursor-follow: make the whole stack face the cursor ---
+    function ensureStackInner(container){
+      let s = container.querySelector('.stack-inner');
+      if (!s){
+        s = document.createElement('div');
+        s.className = 'stack-inner';
+        while(container.firstChild){ s.appendChild(container.firstChild); }
+        container.appendChild(s);
+      }
+      return s;
+    }
+
+    const stackInner = ensureStackInner(container);
+
+    // ensure each card has an inner wrapper so cursor transforms don't conflict
+    function ensureInner(card){
+      let inner = card.querySelector('.card-inner');
+      if (!inner){
+        inner = document.createElement('div');
+        inner.className = 'card-inner';
+        while(card.firstChild){ inner.appendChild(card.firstChild); }
+        card.appendChild(inner);
+      }
+      return inner;
+    }
+
+    const inners = cards.map(c => ensureInner(c));
+
+    // Initialize stacked visual: set z-index on card (outer) and translateY on inner
     cards.forEach((c,i)=>{
       c.dataset.index = i;
       c.style.zIndex = String(cards.length - i);
-      // apply slight scale/offset for depth initial state
-      const depth = i * 8; // px
-      const scale = 1 - i * 0.02;
-      c.style.transform = `translate(-50%, -50%) translateY(${depth}px) scale(${scale})`;
+      c.style.willChange = 'transform,opacity';
       c.style.opacity = '1';
+      const inner = inners[i];
+      // don't vertically shift inner content (keeps images aligned)
+      if (inner) inner.style.transform = `translateY(0)`;
     });
 
-    // compute total scroll space and prepare lockable behavior
-    // Use one viewport per card so final card is fully visible at the end
-    let totalScroll = cards.length * window.innerHeight;
-    const originalInlineMinHeight = section.style.minHeight || '';
-    section.style.minHeight = totalScroll + 'px';
+    // quick setters for per-card subtle counter motion (apply to inner wrappers)
+    const cardSetters = inners.map(inner => gsap.quickSetter(inner, 'x', 'px'));
 
-    // simplified: we no longer lock the viewport; visuals driven by scroll only
-    let lockScrollY = 0; // kept for compatibility
-    let internalProgress = 0; // 0..1 across the stack
-    let originalBodyOverflow = '';
-    let originalSectionTop = section.getBoundingClientRect().top + window.scrollY;
-    let originalSectionHeight = 0;
+    const maxRotateY = 12; // degrees
+    const maxRotateX = 8; // degrees
+    const maxCardOffset = 22; // px
 
-    function applyProgress(p){
-      const progress = clamp(p, 0, 1);
-      const step = 1 / cards.length;
-      cards.forEach((c,i)=>{
-        const cardStart = i * step;
-        const cardEnd = (i+1) * step;
-        const local = clamp((progress - cardStart) / (cardEnd - cardStart || 1), 0, 1);
-        const translateX = -Math.min(120, 120 * local);
-        const translateY = i * 8;
-        const scale = 1 - i * 0.02;
-        const extraScale = 1 - 0.03 * local;
-        const opacity = 1 - local;
-        c.style.transform = `translate(-50%, -50%) translateX(${translateX}%) translateY(${translateY}px) scale(${scale * extraScale})`;
-        c.style.opacity = String(opacity);
-      });
-    }
-
-    // removed lock/unlock: we simply compute progress from scroll and
-    // when progress completes we restore original minHeight so the page continues.
-
-    // wheel/touch handlers: define no-ops so adding listeners won't throw.
-    // When locked we'll prevent default on wheel/touch to avoid jumpiness.
-    // allow wheel events to perform their native scrolling (we drive visuals from scroll)
-    function onWheel(e){ /* no-op: allow default scrolling */ }
-    let touchY = 0;
-    function onTouchStart(e){ if (e.touches && e.touches[0]) touchY = e.touches[0].clientY; }
-    // touchmove should also not block native scroll behavior
-    function onTouchMove(e){ /* no-op: allow default touch scrolling */ }
-
-    // no lock trigger logic required with scroll-driven approach
-
-    // scrolling drives progress; allow scrollbar to control animation
-    function onScrollHandler(){
-      const y = window.scrollY;
+    function onPointerMove(e){
       const rect = section.getBoundingClientRect();
-      const scrollStart = originalSectionTop; // absolute start
-      const scrollEnd = originalSectionTop + totalScroll - window.innerHeight; // where progress should reach 1
-      const progress = clamp((y - scrollStart) / (scrollEnd - scrollStart || 1), 0, 1);
-      applyProgress(progress);
-      // toggle sticky class while progress is between 0 and 1 so the section
-      // stays visible while the stacked animation runs (no viewport lock)
-      if (progress > 0 && progress < 1) {
-        section.classList.add('stack-locked');
-      } else {
-        section.classList.remove('stack-locked');
-      }
-      internalProgress = progress;
-      if (internalProgress >= 1) {
-        // final state reached: ensure visuals are at 100%
-        applyProgress(1);
-        // restore original min-height so the page flow continues normally
-        section.style.minHeight = originalInlineMinHeight;
-        section.classList.remove('stack-locked');
-        // Do NOT programmatically advance the viewport — allow native scrolling.
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height/2;
+      const mx = e.clientX != null ? e.clientX : (e.touches && e.touches[0] && e.touches[0].clientX) || cx;
+      const my = e.clientY != null ? e.clientY : (e.touches && e.touches[0] && e.touches[0].clientY) || cy;
+      const nx = Math.max(-1, Math.min(1, (mx - cx) / (rect.width/2)));
+      const ny = Math.max(-1, Math.min(1, (my - cy) / (rect.height/2)));
+
+      const rotY = nx * maxRotateY;
+      const rotX = -ny * maxRotateX;
+
+      // set CSS variables on the stack inner so CSS can apply transforms
+      stackInner.style.setProperty('--rotateY', rotY + 'deg');
+      stackInner.style.setProperty('--rotateX', rotX + 'deg');
+
+      // per-card counter motion: cards behind move opposite a bit
+      for (let i = 0; i < cardSetters.length; i++){
+        const depth = i; // deeper cards move slightly more
+        const ox = -nx * (Math.min(1, 0.2 * depth) * maxCardOffset);
+        cardSetters[i](ox);
       }
     }
 
-    window.addEventListener('scroll', onScrollHandler, { passive: true });
-    window.addEventListener('resize', ()=>{
-      totalScroll = cards.length * window.innerHeight;
-      section.style.minHeight = totalScroll + 'px';
-      // recompute absolute section top for progress math
-      originalSectionTop = section.getBoundingClientRect().top + window.scrollY;
-    });
+    function onPointerLeave(){
+      // reset
+      stackInner.style.setProperty('--rotateY', '0deg');
+      stackInner.style.setProperty('--rotateX', '0deg');
+      inners.forEach((_, i)=> gsap.to(inners[i], {x:0, duration:0.4, ease:'power3.out'}));
+    }
 
-    // global handlers
-    window.addEventListener('wheel', onWheel, { passive: false });
-    window.addEventListener('touchstart', onTouchStart, { passive: false });
-    window.addEventListener('touchmove', onTouchMove, { passive: false });
-
-    // initial render
-    applyProgress(0);
+    section.addEventListener('mousemove', onPointerMove);
+    section.addEventListener('touchmove', onPointerMove, {passive:true});
+    section.addEventListener('mouseleave', onPointerLeave);
+    section.addEventListener('touchend', onPointerLeave);
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup);
-  else setup();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();

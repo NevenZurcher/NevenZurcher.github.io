@@ -72,23 +72,14 @@ body {
     position: fixed;
     left: 45vw;
     z-index: 1301;
+    font-family: 'MonumentExtended', sans-serif;
 }
 #menu-icon {
     font-size: 3.5rem;
     color: var(--main-color);
     display: none;
 }
-.logo {
-    font-size: 3rem;
-    color: var(--text-color);
-    font-weight: 800;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-    font-family: 'MonumentExtended', sans-serif;
-}
-.logo:hover {
-    transform: scale(1.1);
-}
+
 span{
     background: linear-gradient(
         270deg,
@@ -99,27 +90,6 @@ span{
     color: transparent;
     font-family: 'MonumentExtended', sans-serif;
     font-weight: 800;
-}
-
-.logo span {
-  background: linear-gradient(
-    325deg,
-    var(--secondary-color) 0%,
-    var(--main-color) 55%,
-    var(--secondary-color) 90%
-  );
-  background-size: 280% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  transition: background-position 0.8s ease-in-out, text-shadow 0.8s ease-in-out;
-}
-
-.logo span:hover {
-  background-position: right top;
-  text-shadow:
-    0px 0px 20px rgba(71, 184, 255, 0.5),
-    0px 5px 5px -1px rgba(58, 125, 233, 0.25);
 }
 
 .header #icon{
@@ -134,7 +104,7 @@ span{
     height: 75px;
     object-fit: contain;
     margin-top: -10px;
-    margin-left: -8rem;
+    margin-left: -20rem;
 }
 
 .navbar{
@@ -148,16 +118,26 @@ span{
     color: var(--text-color);
     margin: 0;
     font-weight: 600;
-    transition: 0.3s ease-in-out;
+    transition: color 220ms ease, text-shadow 220ms ease, filter 220ms ease, transform 220ms ease;
     border-bottom: 3px solid transparent;
     font-family: 'BBH Bogle', sans-serif;
     font-weight: 400;
     /* space words (not letters) */
     padding: 0 1rem;
+    display: inline-block;
 }
 
 .navbar a:hover {
     color: var(--main-color);
+    text-shadow: 0 0 14px rgba(65,227,255,0.25), 0 0 32px rgba(65,227,255,0.12);
+    filter: drop-shadow(0 6px 18px rgba(65,227,255,0.10));
+    transform: translateY(-2px);
+}
+
+.navbar a:focus-visible{
+    outline: 2px solid rgba(65,227,255,0.12);
+    outline-offset: 4px;
+    text-shadow: 0 0 14px rgba(65,227,255,0.3);
 }
 .gradient-btn{
     font-size: 1.8rem;
@@ -204,7 +184,9 @@ section{
     text-align: right;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
-    padding: 4rem 3rem;
+    padding: 4rem 7rem;
+    /* drop shadow to lift the home panel */
+    box-shadow: 0 30px 60px rgba(2,6,23,0.65), 0 6px 20px rgba(65,227,255,0.06);
     border-radius: 3rem;
     width: 40vw;
     max-width: 680px;
@@ -367,7 +349,7 @@ section{
     justify-content: center;
     align-items: center;
     gap: 20rem;
-    background: var(--secondary-bg-color);
+    background: linear-gradient(180deg, var(--bg-color) 0%, var(--secondary-bg-color) 100%);
 }
 .about-img img{
     width: 25vw;
@@ -398,6 +380,25 @@ section{
     align-items: center;
     gap: 10rem;
     background: var(--secondary-bg-color);
+}
+
+/* Temporary override: when the projects stack finishes we mark it with
+   data-finished="true" so the section is forced out of sticky/overlay
+   positioning. This is a reversible, non-invasive fallback while we
+   fix root causes (duplicate three.js, incorrect media URLs, runtime). */
+#projects[data-finished="true"],
+#projects.stack-locked[data-finished="true"] {
+    position: static !important;
+    z-index: auto !important;
+    pointer-events: auto !important;
+}
+
+/* Performance hints for compositor: keep transform/opacity on the GPU layer */
+.projects-box .project-card {
+    will-change: transform, opacity;
+}
+.projects-box {
+    transform: translateZ(0);
 }
 .about-page-content h1{
     font-size: 7rem;
@@ -535,17 +536,33 @@ h1, h2, h3, .heading, .pin-inner > .heading {
 .projects{
     background-color: var(--secondary-bg-color);
 }
+.projects > .heading,
+.projects .heading {
+    text-align: right;
+    transform: translate(10rem, 5rem);
+}
 .projects-box{
     /* Stacked cards container - cards are absolutely stacked and animated on scroll */
     position: relative;
     height: 100vh; /* JS will expand this to provide enough scroll space */
+    /* nudge the whole stack lower in the section without changing transforms */
+    padding-top: 18vh;
     display: block;
+}
+
+/* Stack inner wrapper receives CSS variable rotations from JS */
+.projects-box .stack-inner{
+    transform-style: preserve-3d;
+    /* use CSS variables set by JS */
+    transform: perspective(900px) rotateY(var(--rotateY, 0deg)) rotateX(var(--rotateX, 0deg));
+    transition: transform 120ms linear;
 }
 .project-card{
     position: absolute;
-    top: 33%;
+    top: 55%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    /* move up slightly less so visual appears lower on screen */
+    transform: translate(-50%, -40%);
     width: 60%;
     max-width: 443px;
     min-width: 360px;
@@ -556,6 +573,7 @@ h1, h2, h3, .heading, .pin-inner > .heading {
     padding: 2rem;
     box-shadow: 0 0 25px var(--main-color)!important;
     transition: transform 300ms ease, opacity 220ms ease;
+    height: 650px;
 }
 .project-card img{
     max-width: 400px;
@@ -573,13 +591,17 @@ h1, h2, h3, .heading, .pin-inner > .heading {
     font-weight: 400;
 }
 
+.project-card .btn{
+    margin-top: 2rem;
+}
+
 /* slight stacked visual offsets for depth */
 .project-card[data-index] {
     transform-origin: center;
 }
 
 @media (max-width: 900px){
-    .projects-box{ height: auto }
+    .projects-box{ height: auto; padding-top: 4rem }
     .project-card{ position: relative; transform: none; width: 100%; margin-bottom: 2rem }
 }
 
@@ -593,19 +615,60 @@ h1, h2, h3, .heading, .pin-inner > .heading {
 }
 
 .contact{
-    background-color: var(--bg-color);
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--secondary-bg-color) 0%, var(--bg-color) 100%);
 }
+
+
 .contact h2{
     margin-bottom: 3rem;
     color: var(--text-color);
-}
-.contact-form{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3rem;
-    margin: 5rem 0;
     text-align: center;
+}
+
+.contact form{
+    /* keep the form on the right side of the section */
+    width: 48%;
+    max-width: 720px;
+    margin-left: auto;
+    box-sizing: border-box;
+    margin-top: 7rem;
+}
+
+/* make contact spline fill the section behind content */
+.contact-spline{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    object-fit: cover;
+}
+
+/* When the global spline is mounted make it fixed and reveal behind sections */
+/* When the contact spline is preloaded mark the section so its background
+   can be made transparent when the section becomes visible. The spline
+   element itself remains inside the contact section and is positioned
+   absolutely to fill the section (see .contact-spline above). */
+.contact.spline-ready{
+    background: transparent !important;
+}
+
+/* Ensure contact content sits above the spline */
+.contact.spline-ready .heading,
+.contact.spline-ready form{
+    position: relative;
+    z-index: 3;
+}
+
+/* ensure visible content sits above the spline background */
+.contact .heading,
+.contact form{
+    position: relative;
+    z-index: 3;
 }
 .contact form .input-box input,
 .contact form textarea{
@@ -615,9 +678,19 @@ h1, h2, h3, .heading, .pin-inner > .heading {
     color: var(--text-color);
     background-color: var(--bg-color);
     border-radius: 2rem;
-    border: 2px solid var(--main-color);
     margin: 1.5rem 0;
     resize: none;
+    
+    background: rgba(0,0,0,0.34);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 3.5rem;
+    border-radius: 2.5rem;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 30px 60px rgba(2,6,23,0.65), 0 8px 30px rgba(65,227,255,0.05);
+    text-align: left;
+
+    font-family: 'BBH Bogle', sans-serif;
 }
 
 .footer{
@@ -638,10 +711,14 @@ h1, h2, h3, .heading, .pin-inner > .heading {
 .footer ul li a{
     color: white;
     border-bottom: 3px solid transparent;
-    transition: 0.3s ease-in-out;
+    transition: color 220ms ease, text-shadow 220ms ease, filter 220ms ease;
+    font-family: 'BBH Bogle', sans-serif;
 }
 .footer ul li a:hover {
-    border-bottom: 3px solid var(--main-color);
+    color: var(--main-color);
+    text-shadow: 0 0 14px rgba(65,227,255,0.25), 0 0 32px rgba(65,227,255,0.12);
+    filter: drop-shadow(0 6px 18px rgba(65,227,255,0.10));
+
 }
 .footer .copyright{
     text-align: center;
@@ -693,6 +770,7 @@ h1, h2, h3, .heading, .pin-inner > .heading {
     .about{
         flex-direction: column-reverse;
         text-align: center;
+        background-color: linear-gradient(180deg, var(--secondary-bg-color) 0%, var(--bg-color) 100%);
     }
     .about h2{
         text-align: center;
@@ -703,6 +781,8 @@ h1, h2, h3, .heading, .pin-inner > .heading {
     }
     .contact form{
         flex-direction: column;
+        width: 100%;
+        margin-left: 0;
     }
 }
 

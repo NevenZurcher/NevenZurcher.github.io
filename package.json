@@ -1,6 +1,5 @@
 {
   "scripts": {
-    "start": "npx serve . -s",
     "build:spline-widget": "cd spline-widget && npm install && npm run build",
     "dev:spline-widget": "cd spline-widget && npm install && npm run dev"
   },
