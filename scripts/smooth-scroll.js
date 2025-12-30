@@ -1,12 +1,13 @@
 // Smooth scroll helper with configurable duration and easing.
 (function () {
-  const DEFAULT_DURATION = 1000; // ms, increase to slow down
+  const DEFAULT_DURATION = 1500; // ms, lower for snappier navigation
 
   function isHashLink(el) {
     return el && el.tagName === 'A' && el.getAttribute('href') && el.getAttribute('href').startsWith('#');
   }
 
-  function easeInOutQuad(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+  // Use an ease-out cubic so motion starts immediately and decelerates smoothly
+  function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
 
   function animateScroll(toY, duration) {
     const startY = window.scrollY || window.pageYOffset;
@@ -18,7 +19,7 @@
       function step(now) {
         const elapsed = now - start;
         const t = Math.min(1, elapsed / duration);
-        const eased = easeInOutQuad(t);
+        const eased = easeOutCubic(t);
         window.scrollTo(0, Math.round(startY + diff * eased));
         if (t < 1) requestAnimationFrame(step);
         else resolve();
@@ -45,6 +46,23 @@
     return Promise.resolve();
   }
 
+  // Start scroll on pointerdown (mousedown) for snappier response in Chrome.
+  // We only react to primary button (button === 0) and mark the link so the
+  // click handler doesn't run the animation twice.
+  document.addEventListener('pointerdown', function (ev) {
+    if (ev.button !== 0) return;
+    const a = ev.target.closest && ev.target.closest('a');
+    if (!a) return;
+    if (!isHashLink(a)) return;
+    const href = a.getAttribute('href');
+    const hash = href.split('#')[1] ? '#' + href.split('#').slice(1).join('#') : '#';
+    const attr = a.getAttribute('data-scroll-duration');
+    const dur = attr ? parseInt(attr, 10) : DEFAULT_DURATION;
+    // mark to avoid duplicate invocation from the click event
+    a.dataset._scrollInitiated = '1';
+    scrollToHash(hash, dur, true);
+  }, { passive: true });
+
   document.addEventListener('click', function (ev) {
     const a = ev.target.closest && ev.target.closest('a');
     if (!a) return;
@@ -52,6 +70,11 @@
     const href = a.getAttribute('href');
     const hash = href.split('#')[1] ? '#' + href.split('#').slice(1).join('#') : '#';
     ev.preventDefault();
+    // if pointerdown already initiated the scroll, skip re-calling it
+    if (a.dataset._scrollInitiated) {
+      delete a.dataset._scrollInitiated;
+      return;
+    }
     const attr = a.getAttribute('data-scroll-duration');
     const dur = attr ? parseInt(attr, 10) : DEFAULT_DURATION;
     scrollToHash(hash, dur, true);
