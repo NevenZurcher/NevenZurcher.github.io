@@ -13,24 +13,27 @@
     const section = document.querySelector('#projects');
     if (!section) return;
 
-    // Disable GSAP stack on mobile (<= 768px) so the mobile carousel takes over
-    if (window.innerWidth <= 768) return;
-
     const container = section.querySelector('.projects-box');
     if (!container) return;
     const cards = Array.from(container.querySelectorAll('.project-card'));
     if (!cards.length) return;
 
-    // We'll initialize stacked visual after creating inner wrappers
-
     // Build timeline where each card moves up & fades out in sequence
     const totalDuration = Math.max(1, cards.length * 0.6);
+
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: 'top top',
-        end: () => `+=${window.innerHeight * (cards.length * 0.7)}`, // reduced scroll distance
-        scrub: 0.3, // smooth scrubbing with 0.3 second delay (balances smoothness and responsiveness)
+        end: () => {
+          // Adjust scroll distance based on screen size
+          // Mobile: shorter but not too short (need to see animation reverse)
+          const isMobile = window.innerWidth <= 768;
+          const scrollMultiplier = isMobile ? 0.25 : 0.7;
+          return `+=${window.innerHeight * (cards.length * scrollMultiplier)}`;
+        },
+        scrub: window.innerWidth <= 768 ? 0.1 : 0.3, // faster scrub on mobile for better responsiveness
         pin: section,
         anticipatePin: 1,
         invalidateOnRefresh: true,
@@ -43,13 +46,14 @@
     cards.forEach((c, i) => {
       const dir = (i % 2 === 0) ? -1 : 1; // even -> left, odd -> right
       const leaveX = dir * (220 + i * 40);
+      const offScreenX = dir * (Math.max(window.innerWidth, 800) * 1.2);
 
       // 1) move slightly out of the stack (no fade)
       tl.to(c, { x: leaveX, ease: 'none', duration: 1 });
 
       // 2) swipe quickly off-screen in same direction — appended after the leave tween
       tl.to(c, {
-        x: () => dir * (Math.max(window.innerWidth, 800) * 1.2),
+        x: offScreenX,
         ease: 'power2.in',
         duration: 0.45
       });
@@ -168,10 +172,14 @@
       inners.forEach((_, i) => gsap.to(inners[i], { x: 0, duration: 0.4, ease: 'power3.out' }));
     }
 
-    section.addEventListener('mousemove', onPointerMove);
-    section.addEventListener('touchmove', onPointerMove, { passive: true });
-    section.addEventListener('mouseleave', onPointerLeave);
-    section.addEventListener('touchend', onPointerLeave);
+    // Only enable cursor-following on devices with fine pointers (mouse)
+    // Touch devices will still get the scroll animation, just not the cursor effects
+    const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+    if (hasFinePointer) {
+      section.addEventListener('mousemove', onPointerMove);
+      section.addEventListener('mouseleave', onPointerLeave);
+    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

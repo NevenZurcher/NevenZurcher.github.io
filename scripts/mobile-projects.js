@@ -6,6 +6,9 @@
 
 (function () {
     function initMobileCarousel() {
+        // Disabled: GSAP stacking now handles all screen sizes
+        return;
+
         // Only run on mobile
         if (window.innerWidth > 768) return;
 

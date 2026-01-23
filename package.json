@@ -1,5 +1,8 @@
 {
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "build:spline-widget": "cd spline-widget && npm install && npm run build",
     "dev:spline-widget": "cd spline-widget && npm install && npm run dev"
   },
@@ -7,5 +10,10 @@
     "@coreui/icons": "^3.0.1",
     "@splinetool/react-spline": "^4.1.0",
     "vite": "^7.3.1"
+  },
+  "devDependencies": {
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-image-optimizer": "^1.1.8",
+    "terser": "^5.36.0"
   }
 }

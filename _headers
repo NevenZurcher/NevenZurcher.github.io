@@ -1,0 +1,36 @@
+# Cache headers for GitHub Pages
+# Note: GitHub Pages may not support this file format
+# This is provided as reference for other hosting platforms
+
+/*
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+
+# Cache static assets for 1 year
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/scripts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/MonumentExtended/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache HTML files for 1 hour
+/*.html
+  Cache-Control: public, max-age=3600
+
+# Cache manifest and service worker for short time
+/manifest.json
+  Cache-Control: public, max-age=3600
+
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
