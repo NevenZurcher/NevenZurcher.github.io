@@ -49,9 +49,18 @@
     <link href="https://fonts.googleapis.com/css2?family=BBH+Bogle&display=swap" rel="stylesheet">
 
 
+    <!-- Default fallback (must be first so specific media queries override it) -->
     <link rel="icon" type="image/png" sizes="32x32" href="./images/nzlogofavicon.png">
     <link rel="shortcut icon" href="./images/nzlogofavicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./images/nzlogo.png">
+
+    <!-- Light mode favicon (Dark icon) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/nzlogofavicondark.png" media="(prefers-color-scheme: light)">
+    <link rel="shortcut icon" href="./images/nzlogofavicondark.png" media="(prefers-color-scheme: light)">
+    
+    <!-- Dark mode favicon (Original/Light icon) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/nzlogofavicon.png" media="(prefers-color-scheme: dark)">
+    <link rel="shortcut icon" href="./images/nzlogofavicon.png" media="(prefers-color-scheme: dark)">
   </head>
   <body>
     <header class="header">
@@ -339,5 +348,23 @@
     <script type="module" src="/spline-widget/spline-widget.js"></script>
 
     <script src="/scripts/spline-debug.js" defer></script>
+    <script>
+      // Force favicon update based on system theme (fixes local caching/browser support issues)
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      function updateFavicon(e) {
+        const icons = document.querySelectorAll("link[rel~='icon']");
+        const isDark = e.matches;
+        // In dark mode -> use light icon (original)
+        // In light mode -> use dark icon (new)
+        const newIcon = isDark ? '/images/nzlogofavicon.png' : '/images/nzlogofavicondark.png';
+        
+        icons.forEach(icon => {
+          icon.href = newIcon;
+        });
+      }
+      mediaQuery.addEventListener('change', updateFavicon);
+      // Run once on load
+      updateFavicon(mediaQuery);
+    </script>
   </body>
 </html>
