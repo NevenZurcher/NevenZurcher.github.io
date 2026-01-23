@@ -5,7 +5,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: path.resolve(__dirname, '../assets/spline-widget'),
+    outDir: path.resolve(__dirname, '../public/spline-widget'),
     emptyOutDir: true,
     rollupOptions: {
       input: path.resolve(__dirname, 'src', 'main.jsx'),

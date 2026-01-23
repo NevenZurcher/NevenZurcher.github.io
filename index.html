@@ -323,20 +323,21 @@
     </footer>
 
     <!-- Scripts deferred for better performance -->
-    <script src="./scripts/script.js" defer></script>
+    <script src="/scripts/script.js" defer></script>
     
     <!-- GSAP for scroll-driven stacking animation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script src="./scripts/projects-stack.js" defer></script>
-    <script src="./scripts/mobile-projects.js" defer></script>
+    <script src="/scripts/projects-stack.js" defer></script>
+    <script src="/scripts/mobile-projects.js" defer></script>
 
     <!-- Spline viewer -->
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.36/build/spline-viewer.js"></script>
 
     <!-- Spline widget bundle (build with `npm run build:spline-widget`) -->
-    <script type="module" src="/assets/spline-widget/spline-widget.js"></script>
+    <link rel="stylesheet" href="/spline-widget/main.css">
+    <script type="module" src="/spline-widget/spline-widget.js"></script>
 
-    <script src="./scripts/spline-debug.js" defer></script>
+    <script src="/scripts/spline-debug.js" defer></script>
   </body>
 </html>
