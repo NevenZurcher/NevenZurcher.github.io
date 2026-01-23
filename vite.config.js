@@ -44,10 +44,6 @@ export default defineConfig({
                 main: './index.html'
             },
             output: {
-                // Manual chunking for better caching
-                manualChunks: {
-                    'vendor-gsap': ['gsap'],
-                },
                 // Add content hash to filenames for cache busting
                 entryFileNames: 'assets/[name].[hash].js',
                 chunkFileNames: 'assets/[name].[hash].js',
@@ -56,9 +52,5 @@ export default defineConfig({
         },
         // Increase chunk size warning limit
         chunkSizeWarningLimit: 1000
-    },
-    // Optimize dependencies
-    optimizeDeps: {
-        include: ['gsap']
     }
 })
