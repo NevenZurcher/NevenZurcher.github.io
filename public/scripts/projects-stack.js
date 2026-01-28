@@ -4,7 +4,7 @@
 (function () {
   function init() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-      console.warn('[projects-stack] GSAP or ScrollTrigger not found — aborting.');
+      // console.warn('[projects-stack] GSAP or ScrollTrigger not found — aborting.');
       return;
     }
 
@@ -134,31 +134,7 @@
 
     let isAnimating = false;
 
-    function onPointerMove(e) {
-      const rect = section.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const mx = e.clientX != null ? e.clientX : (e.touches && e.touches[0] && e.touches[0].clientX) || cx;
-      const my = e.clientY != null ? e.clientY : (e.touches && e.touches[0] && e.touches[0].clientY) || cy;
-      const nx = Math.max(-1, Math.min(1, (mx - cx) / (rect.width / 2)));
-      const ny = Math.max(-1, Math.min(1, (my - cy) / (rect.height / 2)));
-
-      targetRotY = nx * maxRotateY;
-      targetRotX = -ny * maxRotateX;
-
-      // Start animation loop if not already running
-      if (!isAnimating) {
-        isAnimating = true;
-        requestAnimationFrame(smoothUpdate);
-      }
-
-      // per-card counter motion: cards behind move opposite a bit
-      for (let i = 0; i < cardSetters.length; i++) {
-        const depth = i; // deeper cards move slightly more
-        const ox = -nx * (Math.min(1, 0.2 * depth) * maxCardOffset);
-        cardSetters[i](ox);
-      }
-    }
+    // Optimized handler is defined below in the hasFinePointer check
 
     function onPointerLeave() {
       // reset targets and current values
@@ -177,8 +153,45 @@
     const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
 
     if (hasFinePointer) {
+      // Cache dimensions to avoid forced reflows in mousemove
+      let rect = section.getBoundingClientRect();
+      const updateRect = () => { rect = section.getBoundingClientRect(); };
+
+      // Update rect on scroll/resize (throttled by browser usually, but good to have)
+      window.addEventListener('scroll', updateRect, { passive: true });
+      window.addEventListener('resize', updateRect, { passive: true });
+
+      function onPointerMove(e) {
+        // Use cached rect
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const mx = e.clientX != null ? e.clientX : (e.touches && e.touches[0] && e.touches[0].clientX) || cx;
+        const my = e.clientY != null ? e.clientY : (e.touches && e.touches[0] && e.touches[0].clientY) || cy;
+        const nx = Math.max(-1, Math.min(1, (mx - cx) / (rect.width / 2)));
+        const ny = Math.max(-1, Math.min(1, (my - cy) / (rect.height / 2)));
+
+        targetRotY = nx * maxRotateY;
+        targetRotX = -ny * maxRotateX;
+
+        // Start animation loop if not already running
+        if (!isAnimating) {
+          isAnimating = true;
+          requestAnimationFrame(smoothUpdate);
+        }
+
+        // per-card counter motion: cards behind move opposite a bit
+        for (let i = 0; i < cardSetters.length; i++) {
+          const depth = i; // deeper cards move slightly more
+          const ox = -nx * (Math.min(1, 0.2 * depth) * maxCardOffset);
+          cardSetters[i](ox);
+        }
+      }
+
       section.addEventListener('mousemove', onPointerMove);
       section.addEventListener('mouseleave', onPointerLeave);
+
+      // Initial rect read
+      updateRect();
     }
   }
 

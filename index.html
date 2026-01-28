@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Neven Zurcher - Portfolio 2026. Web and Software Developer specializing in modern, high-performance applications." />
     <title>Neven Zurcher</title>
     
     <!-- DNS Prefetch & Preconnect for external domains to reduce DNS lookup time -->
@@ -13,7 +14,7 @@
     <link rel="dns-prefetch" href="https://unpkg.com">
     <link rel="dns-prefetch" href="https://prod.spline.design">
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.boxicons.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -24,27 +25,27 @@
     <!-- External stylesheets with preload for better performance -->
     <link
       rel="preload"
-      href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
+      href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css?display=swap"
       as="style"
       onload="this.onload=null;this.rel='stylesheet'"
     />
-    <noscript><link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet" /></noscript>
+    <noscript><link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css?display=swap" rel="stylesheet" /></noscript>
     
     <link
       rel="preload"
-      href="https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css"
+      href="https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css?display=swap"
       as="style"
       onload="this.onload=null;this.rel='stylesheet'"
     />
-    <noscript><link href="https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css" rel="stylesheet" /></noscript>
+    <noscript><link href="https://cdn.boxicons.com/fonts/brands/boxicons-brands.min.css?display=swap" rel="stylesheet" /></noscript>
 
     <link
       rel="preload"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css?display=swap"
       as="style"
       onload="this.onload=null;this.rel='stylesheet'"
     />
-    <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" /></noscript>
+    <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css?display=swap" rel="stylesheet" /></noscript>
 
     <link href="https://fonts.googleapis.com/css2?family=BBH+Bogle&display=swap" rel="stylesheet">
 
@@ -80,6 +81,7 @@
 
     
 
+    <main>
     <section class="home" id="home">
       </div>
       <div class="home-content">
@@ -88,15 +90,15 @@
         <h4>Development • Design • Strategy</h4>
 
         <div class="social-icons">
-          <a href="https://github.com/NevenZurcher" target="_blank">
+          <a href="https://github.com/NevenZurcher" target="_blank" aria-label="GitHub">
             <i class="bxl bx-github"></i>
           </a>
 
-          <a href="https://www.linkedin.com/in/nevenzurcher/" target="_blank">
+          <a href="https://www.linkedin.com/in/nevenzurcher/" target="_blank" aria-label="LinkedIn">
             <i class="bxl bx-linkedin-square"></i>
           </a>
 
-          <a href="https://www.hackerrank.com/profile/nevzurcher" target="_blank">
+          <a href="https://www.hackerrank.com/profile/nevzurcher" target="_blank" aria-label="HackerRank">
             <i class="fab fa-hackerrank" style="font-size:30px"></i>
           </a>
 
@@ -112,7 +114,10 @@
     <section class="about" id="about">
       <div class="about-card">
         <div class="about-img">
-          <img src="/images/about.jpg" alt="Neven Zurcher" loading="lazy" />
+          <picture>
+            <source srcset="/images/about-opt.webp" type="image/webp">
+            <img src="/images/about.jpg" alt="Neven Zurcher" loading="lazy" width="300" height="300" />
+          </picture>
         </div>
         <div class="about-content">
           <h2>About <span>Me</span></h2>
@@ -240,7 +245,10 @@
         </div>
 
         <div class="project-card">
-          <img src="/images/SFalt1.png" alt="SwiftFillAI Project" loading="lazy" />
+          <picture>
+            <source srcset="/images/SFalt1-opt.webp" type="image/webp">
+            <img src="/images/SFalt1.png" alt="SwiftFillAI Project" loading="lazy" width="400" height="400" />
+          </picture>
 
           <h3>SwiftFillAI</h3>
 
@@ -257,7 +265,10 @@
         </div>
 
         <div class="project-card">
-          <img src="/images/EcoSnap.png" alt="EcoSnap Project" loading="lazy" />
+          <picture>
+            <source srcset="/images/EcoSnap-opt.webp" type="image/webp">
+            <img src="/images/EcoSnap.png" alt="EcoSnap Project" loading="lazy" width="400" height="400" />
+          </picture>
 
           <h3>EcoSnap</h3>
           <h4>Designer + Developer</h4>
@@ -271,7 +282,7 @@
       
     </section>
     <section class="contact" id="contact">
-    <spline-viewer url="https://prod.spline.design/PDE3Scjb0U18iJHb/scene.splinecode" class="contact-spline" loading="eager"></spline-viewer>
+    <spline-viewer url="https://prod.spline.design/PDE3Scjb0U18iJHb/scene.splinecode" class="contact-spline" loading="lazy"></spline-viewer>
       <h2 class="heading">Contact <span>Me</span></h2>
 
       <div class="contact-cards-container">
@@ -312,6 +323,7 @@
         </div>
       </div>
     </section>
+    </main>
 
     <footer class="footer">
       <div class="social-icons">
@@ -341,7 +353,7 @@
     <script src="/scripts/mobile-projects.js" defer></script>
 
     <!-- Spline viewer -->
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.36/build/spline-viewer.js"></script>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.41/build/spline-viewer.js"></script>
 
     <!-- Spline widget bundle (build with `npm run build:spline-widget`) -->
     <link rel="stylesheet" href="/spline-widget/main.css">

@@ -1,0 +1,1082 @@
+﻿--- Lighthouse Scores ---
+Performance: 82
+Accessibility: 86
+Best Practices: 100
+SEO: 83
+
+--- Failed Audits (Score < 1) ---
+
+Audit: First Contentful Paint (first-contentful-paint)
+Score: 0.37
+Value: 1.8┬ás
+
+Audit: Largest Contentful Paint (largest-contentful-paint)
+Score: 0.65
+Value: 1.9┬ás
+
+Audit: Speed Index (speed-index)
+Score: 0.7
+Value: 1.8┬ás
+
+Audit: Max Potential First Input Delay (max-potential-fid)
+Score: 0.98
+Value: 80┬áms
+
+Audit: Time to Interactive (interactive)
+Score: 0.91
+Value: 2.4┬ás
+
+Audit: Minimize main-thread work (mainthread-work-breakdown)
+Score: 0.5
+Value: 2.7┬ás
+Details (First 3 items):
+[
+  {
+    "group": "scriptEvaluation",
+    "groupLabel": "Script Evaluation",
+    "duration": 1718.145999999998
+  },
+  {
+    "group": "other",
+    "groupLabel": "Other",
+    "duration": 497.42199999998627
+  },
+  {
+    "group": "styleLayout",
+    "groupLabel": "Style & Layout",
+    "duration": 308.5080000000003
+  }
+]
+
+Audit: Reduce JavaScript execution time (bootup-time)
+Score: 0
+Value: 1.7┬ás
+Details (First 3 items):
+[
+  {
+    "url": "https://unpkg.com/@splinetool/viewer@1.12.41/build/spline-viewer.js",
+    "total": 1588.5580000000064,
+    "scripting": 1567.8810000000065,
+    "scriptParseCompile": 2.526
+  },
+  {
+    "url": "http://localhost:5173/",
+    "total": 338.88800000000043,
+    "scripting": 7.081999999999996,
+    "scriptParseCompile": 0.379
+  },
+  {
+    "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+    "total": 335.7130000000022,
+    "scripting": 81.0020000000011,
+    "scriptParseCompile": 1.3190000000000002
+  }
+]
+
+Audit: Image elements do not have explicit `width` and `height` (unsized-images)
+Score: 0.5
+Value: undefined
+Details (First 3 items):
+[
+  {
+    "url": "http://localhost:5173/images/SS2d.png",
+    "node": {
+      "type": "node",
+      "lhId": "1-30-IMG",
+      "path": "1,HTML,1,BODY,4,DIV,0,SECTION,1,DIV,0,DIV,0,DIV,0,DIV,0,IMG",
+      "selector": "div.stack-inner > div.project-card > div.card-inner > img",
+      "boundingRect": {
+        "top": 3331,
+        "bottom": 3731,
+        "left": 404,
+        "right": 804,
+        "width": 400,
+        "height": 400
+      },
+      "snippet": "<img src=\"/images/SS2d.png\" alt=\"StockStalker Project\" loading=\"lazy\">",
+      "nodeLabel": "StockStalker Project"
+    }
+  },
+  {
+    "url": "http://localhost:5173/images/SFalt1.webp",
+    "node": {
+      "type": "node",
+      "lhId": "1-31-IMG",
+      "path": "1,HTML,1,BODY,4,DIV,0,SECTION,1,DIV,0,DIV,1,DIV,0,DIV,0,PICTURE,1,IMG",
+      "selector": "div.project-card > div.card-inner > picture > img",
+      "boundingRect": {
+        "top": 3331,
+        "bottom": 3731,
+        "left": 404,
+        "right": 804,
+        "width": 400,
+        "height": 400
+      },
+      "snippet": "<img src=\"http://localhost:5173/images/SFalt1.webp\" alt=\"SwiftFillAI Project\" loading=\"lazy\">",
+      "nodeLabel": "SwiftFillAI Project"
+    }
+  },
+  {
+    "url": "http://localhost:5173/images/EcoSnap.webp",
+    "node": {
+      "type": "node",
+      "lhId": "1-32-IMG",
+      "path": "1,HTML,1,BODY,4,DIV,0,SECTION,1,DIV,0,DIV,2,DIV,0,DIV,0,PICTURE,1,IMG",
+      "selector": "div.project-card > div.card-inner > picture > img",
+      "boundingRect": {
+        "top": 3331,
+        "bottom": 3731,
+        "left": 404,
+        "right": 804,
+        "width": 400,
+        "height": 400
+      },
+      "snippet": "<img src=\"http://localhost:5173/images/EcoSnap.webp\" alt=\"EcoSnap Project\" loading=\"lazy\">",
+      "nodeLabel": "EcoSnap Project"
+    }
+  }
+]
+
+Audit: Heading elements are not in a sequentially-descending order (heading-order)
+Score: 0
+Value: undefined
+Details (First 3 items):
+[
+  {
+    "node": {
+      "type": "node",
+      "lhId": "1-0-H3",
+      "path": "1,HTML,1,BODY,1,SECTION,0,DIV,1,H3",
+      "selector": "body > section#home > div.home-content > h3",
+      "boundingRect": {
+        "top": 452,
+        "bottom": 492,
+        "left": 800,
+        "right": 985,
+        "width": 186,
+        "height": 40
+      },
+      "snippet": "<h3>",
+      "nodeLabel": "Portfolio 2026",
+      "explanation": "Fix any of the following:\n  Heading order invalid"
+    }
+  }
+]
+
+Audit: Document does not have a main landmark. (landmark-one-main)
+Score: 0
+Value: undefined
+Details (First 3 items):
+[
+  {
+    "node": {
+      "type": "node",
+      "lhId": "1-1-HTML",
+      "path": "1,HTML",
+      "selector": "html",
+      "boundingRect": {
+        "top": 0,
+        "bottom": 7508,
+        "left": 0,
+        "right": 1219,
+        "width": 1219,
+        "height": 7508
+      },
+      "snippet": "<html lang=\"en\" style=\"scroll-behavior: smooth;\">",
+      "nodeLabel": "html",
+      "explanation": "Fix all of the following:\n  Document does not have a main landmark"
+    }
+  }
+]
+
+Audit: Links do not have a discernible name (link-name)
+Score: 0
+Value: undefined
+Details (First 3 items):
+[
+  {
+    "node": {
+      "type": "node",
+      "lhId": "1-2-A",
+      "path": "1,HTML,1,BODY,0,HEADER,0,A",
+      "selector": "body > header.header > a#icon",
+      "boundingRect": {
+        "top": 2,
+        "bottom": 42,
+        "left": 590,
+        "right": 630,
+        "width": 40,
+        "height": 40
+      },
+      "snippet": "<a href=\"#home\" id=\"icon\">",
+      "nodeLabel": "body > header.header > a#icon",
+      "explanation": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+    }
+  },
+  {
+    "node": {
+      "type": "node",
+      "lhId": "1-3-A",
+      "path": "1,HTML,1,BODY,1,SECTION,0,DIV,3,DIV,0,A",
+      "selector": "section#home > div.home-content > div.social-icons > a",
+      "boundingRect": {
+        "top": 559,
+        "bottom": 599,
+        "left": 822,
+        "right": 862,
+        "width": 40,
+        "height": 40
+      },
+      "snippet": "<a href=\"https://github.com/NevenZurcher\" target=\"_blank\">",
+      "nodeLabel": "section#home > div.home-content > div.social-icons > a",
+      "explanation": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+    }
+  },
+  {
+    "node": {
+      "type": "node",
+      "lhId": "1-4-A",
+      "path": "1,HTML,1,BODY,1,SECTION,0,DIV,3,DIV,1,A",
+      "selector": "section#home > div.home-content > div.social-icons > a",
+      "boundingRect": {
+        "top": 559,
+        "bottom": 599,
+        "left": 873,
+        "right": 912,
+        "width": 40,
+        "height": 40
+      },
+      "snippet": "<a href=\"https://www.linkedin.com/in/nevenzurcher/\" target=\"_blank\">",
+      "nodeLabel": "section#home > div.home-content > div.social-icons > a",
+      "explanation": "Fix all of the following:\n  Element is in tab order and does not have accessible text\n\nFix any of the following:\n  Element does not have text that is visible to screen readers\n  aria-label attribute does not exist or is empty\n  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty\n  Element has no title attribute"
+    }
+  }
+]
+
+Audit: Avoid enormous network payloads (total-byte-weight)
+Score: 0.5
+Value: Total size was 2,978┬áKiB
+Details (First 3 items):
+[
+  {
+    "url": "https://prod.spline.design/NHQad1vutWXl0SsM/scene.splinecode",
+    "totalBytes": 1032229
+  },
+  {
+    "url": "https://unpkg.com/@splinetool/viewer@1.12.41/build/spline-viewer.js",
+    "totalBytes": 652089
+  },
+  {
+    "url": "https://cdn.boxicons.com/fonts/basic/boxicons.ttf?8bee12593fc4779f203ae305d79fab56",
+    "totalBytes": 524610
+  }
+]
+
+Audit: Minify CSS (unminified-css)
+Score: 0.5
+Value: Est savings of 11┬áKiB
+Details (First 3 items):
+[
+  {
+    "url": "http://localhost:5173/css/style.css",
+    "totalBytes": 34424,
+    "wastedBytes": 11443,
+    "wastedPercent": 33.24266619870726
+  }
+]
+
+Audit: Minify JavaScript (unminified-javascript)
+Score: 0
+Value: Est savings of 279┬áKiB
+Details (First 3 items):
+[
+  {
+    "url": "http://localhost:5173/@vite/client",
+    "totalBytes": 178928,
+    "wastedBytes": 151374,
+    "wastedPercent": 84.60050970222659
+  },
+  {
+    "url": "chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/vendor/@eyeo/webext-ad-filtering-solution/content.js",
+    "totalBytes": 95910,
+    "wastedBytes": 78062,
+    "wastedPercent": 81.39040377105304
+  },
+  {
+    "url": "chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/globals-front.js",
+    "totalBytes": 40747,
+    "wastedBytes": 19133,
+    "wastedPercent": 46.954873821633356
+  }
+]
+
+Audit: Reduce unused CSS (unused-css-rules)
+Score: 0
+Value: Est savings of 38┬áKiB
+Details (First 3 items):
+[
+  {
+    "url": "https://cdn.boxicons.com/fonts/basic/boxicons.min.css?display=swap",
+    "wastedBytes": 23051,
+    "wastedPercent": 99.75530360890102,
+    "totalBytes": 23108
+  },
+  {
+    "url": "http://localhost:5173/css/style.css",
+    "wastedBytes": 15445,
+    "wastedPercent": 45.17270626773127,
+    "totalBytes": 34191
+  }
+]
+
+Audit: Reduce unused JavaScript (unused-javascript)
+Score: 0
+Value: Est savings of 517┬áKiB
+Details (First 3 items):
+[
+  {
+    "url": "https://unpkg.com/@splinetool/viewer@1.12.41/build/spline-viewer.js",
+    "totalBytes": 651966,
+    "wastedBytes": 380628,
+    "wastedPercent": 58.3815355851882
+  },
+  {
+    "url": "http://localhost:5173/spline-widget/spline-widget.js",
+    "totalBytes": 144297,
+    "wastedBytes": 74845,
+    "wastedPercent": 51.868715219304626
+  },
+  {
+    "url": "chrome-extension://ddkjiahejlhfcafbddmgiahcphecmpfh/rulesets/scripting/scriptlet/main/ublock-filters.js",
+    "totalBytes": 188782,
+    "wastedBytes": 47274,
+    "wastedPercent": 25.041603445744215
+  }
+]
+
+Audit: Document does not have a meta description (meta-description)
+Score: 0
+Value: undefined
+
+Audit: robots.txt is not valid (robots-txt)
+Score: 0
+Value: 324 errors found
+Details (First 3 items):
+[
+  {
+    "index": "1",
+    "line": "<!DOCTYPE html>",
+    "message": "Syntax not understood"
+  },
+  {
+    "index": "2",
+    "line": "<html lang=\"en\">",
+    "message": "Syntax not understood"
+  },
+  {
+    "index": "3",
+    "line": "  <head>",
+    "message": "Syntax not understood"
+  }
+]
+
+Audit: Page prevented back/forward cache restoration (bf-cache)
+Score: 0
+Value: 1 failure reason
+Details (First 3 items):
+[
+  {
+    "reason": "Pages with WebSocket cannot enter back/forward cache.",
+    "failureType": "Pending browser support",
+    "subItems": {
+      "type": "subitems",
+      "items": [
+        {
+          "frameUrl": "http://localhost:5173/#home"
+        }
+      ]
+    },
+    "protocolReason": "WebSocket"
+  }
+]
+
+Audit: Use efficient cache lifetimes (cache-insight)
+Score: 0
+Value: Est savings of 244┬áKiB
+Details (First 3 items):
+[
+  {
+    "url": "https://cdn.boxicons.com/fonts/basic/boxicons.ttf?8bee12593fc4779f203ae305d79fab56",
+    "cacheLifetimeMs": 86400000,
+    "totalBytes": 524610,
+    "wastedBytes": 209844
+  },
+  {
+    "url": "https://cdn.boxicons.com/fonts/brands/boxicons-brands.ttf?b3d54a4467f6f9c84bb64184bdb0fa6b",
+    "cacheLifetimeMs": 86400000,
+    "totalBytes": 72847,
+    "wastedBytes": 29138.800000000003
+  },
+  {
+    "url": "https://cdn.boxicons.com/fonts/basic/boxicons.min.css?display=swap",
+    "cacheLifetimeMs": 86400000,
+    "totalBytes": 23380,
+    "wastedBytes": 9352
+  }
+]
+
+Audit: Document request latency (document-latency-insight)
+Score: 0.5
+Value: Est savings of 11┬áKiB
+
+Audit: Font display (font-display-insight)
+Score: 0
+Value: Est savings of 240┬áms
+Details (First 3 items):
+[
+  {
+    "url": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/webfonts/fa-brands-400.woff2",
+    "wastedMs": 240
+  },
+  {
+    "url": "https://cdn.boxicons.com/fonts/basic/boxicons.ttf?8bee12593fc4779f203ae305d79fab56",
+    "wastedMs": 200
+  },
+  {
+    "url": "https://cdn.boxicons.com/fonts/brands/boxicons-brands.ttf?b3d54a4467f6f9c84bb64184bdb0fa6b",
+    "wastedMs": 115
+  }
+]
+
+Audit: Forced reflow (forced-reflow-insight)
+Score: 0
+Value: undefined
+Details (First 3 items):
+[
+  {
+    "type": "table",
+    "headings": [
+      {
+        "key": "source",
+        "valueType": "source-location",
+        "label": "Top function call"
+      },
+      {
+        "key": "reflowTime",
+        "valueType": "ms",
+        "granularity": 1,
+        "label": "Total reflow time"
+      }
+    ],
+    "items": [
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 10,
+          "column": 16998
+        },
+        "reflowTime": 11.605
+      }
+    ]
+  },
+  {
+    "type": "table",
+    "headings": [
+      {
+        "key": "source",
+        "valueType": "source-location",
+        "label": "Source"
+      },
+      {
+        "key": "reflowTime",
+        "valueType": "ms",
+        "granularity": 1,
+        "label": "Total reflow time"
+      }
+    ],
+    "items": [
+      {
+        "source": {
+          "type": "text",
+          "value": "[unattributed]"
+        },
+        "reflowTime": 85.761
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 33044
+        },
+        "reflowTime": 0.459
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 13254
+        },
+        "reflowTime": 6.422
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 16420
+        },
+        "reflowTime": 0.868
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 22599
+        },
+        "reflowTime": 0.245
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 54556
+        },
+        "reflowTime": 2.931
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 22973
+        },
+        "reflowTime": 0.104
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 13402
+        },
+        "reflowTime": 0.094
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 13543
+        },
+        "reflowTime": 0.413
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 13696
+        },
+        "reflowTime": 0.738
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 13720
+        },
+        "reflowTime": 0.673
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 13732
+        },
+        "reflowTime": 0.35
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 9861
+        },
+        "reflowTime": 4.669
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 16299
+        },
+        "reflowTime": 3.155
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 3294
+        },
+        "reflowTime": 0.611
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          "urlProvider": "network",
+          "line": 9,
+          "column": 3485
+        },
+        "reflowTime": 0.578
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://unpkg.com/@splinetool/viewer@1.12.41/build/spline-viewer.js",
+          "urlProvider": "network",
+          "line": 8209,
+          "column": 31219
+        },
+        "reflowTime": 0.66
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://unpkg.com/@splinetool/viewer@1.12.41/build/spline-viewer.js",
+          "urlProvider": "network",
+          "line": 8209,
+          "column": 31343
+        },
+        "reflowTime": 0.189
+      },
+      {
+        "source": {
+          "type": "source-location",
+          "url": "https://unpkg.com/@splinetool/viewer@1.12.41/build/spline-viewer.js",
+          "urlProvider": "network",
+          "line": 8141,
+          "column": 71437
+        },
+        "reflowTime": 0.452
+      }
+    ]
+  }
+]
+
+Audit: Improve image delivery (image-delivery-insight)
+Score: 0.5
+Value: Est savings of 89┬áKiB
+Details (First 3 items):
+[
+  {
+    "node": {
+      "type": "node",
+      "lhId": "page-11-IMG",
+      "path": "1,HTML,1,BODY,2,SECTION,0,DIV,0,DIV,0,PICTURE,1,IMG",
+      "selector": "div.about-card > div.about-img > picture > img",
+      "boundingRect": {
+        "top": 1199,
+        "bottom": 1499,
+        "left": 460,
+        "right": 760,
+        "width": 300,
+        "height": 300
+      },
+      "snippet": "<img src=\"http://localhost:5173/images/about.webp\" alt=\"Neven Zurcher\" loading=\"lazy\">",
+      "nodeLabel": "Neven Zurcher"
+    },
+    "url": "http://localhost:5173/images/about.webp",
+    "totalBytes": 47752,
+    "wastedBytes": 32752,
+    "subItems": {
+      "type": "subitems",
+      "items": [
+        {
+          "reason": "This image file is larger than it needs to be (526x526) for its displayed dimensions (300x300). Use responsive images to reduce the image download size.",
+          "wastedBytes": 32219
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "type": "node",
+      "lhId": "page-6-IMG",
+      "path": "1,HTML,1,BODY,4,DIV,0,SECTION,1,DIV,0,DIV,2,DIV,0,DIV,0,PICTURE,1,IMG",
+      "selector": "div.project-card > div.card-inner > picture > img",
+      "boundingRect": {
+        "top": 3331,
+        "bottom": 3731,
+        "left": 404,
+        "right": 804,
+        "width": 400,
+        "height": 400
+      },
+      "snippet": "<img src=\"http://localhost:5173/images/EcoSnap.webp\" alt=\"EcoSnap Project\" loading=\"lazy\">",
+      "nodeLabel": "EcoSnap Project"
+    },
+    "url": "http://localhost:5173/images/EcoSnap.webp",
+    "totalBytes": 31590,
+    "wastedBytes": 26770,
+    "subItems": {
+      "type": "subitems",
+      "items": [
+        {
+          "reason": "This image file is larger than it needs to be (1024x1024) for its displayed dimensions (400x400). Use responsive images to reduce the image download size.",
+          "wastedBytes": 26770
+        }
+      ]
+    }
+  },
+  {
+    "node": {
+      "type": "node",
+      "lhId": "page-12-IMG",
+      "path": "1,HTML,1,BODY,4,DIV,0,SECTION,1,DIV,0,DIV,1,DIV,0,DIV,0,PICTURE,1,IMG",
+      "selector": "div.project-card > div.card-inner > picture > img",
+      "boundingRect": {
+        "top": 3331,
+        "bottom": 3731,
+        "left": 404,
+        "right": 804,
+        "width": 400,
+        "height": 400
+      },
+      "snippet": "<img src=\"http://localhost:5173/images/SFalt1.webp\" alt=\"SwiftFillAI Project\" loading=\"lazy\">",
+      "nodeLabel": "SwiftFillAI Project"
+    },
+    "url": "http://localhost:5173/images/SFalt1.webp",
+    "totalBytes": 18960,
+    "wastedBytes": 16067,
+    "subItems": {
+      "type": "subitems",
+      "items": [
+        {
+          "reason": "This image file is larger than it needs to be (1024x1024) for its displayed dimensions (400x400). Use responsive images to reduce the image download size.",
+          "wastedBytes": 16067
+        }
+      ]
+    }
+  }
+]
+
+Audit: Legacy JavaScript (legacy-javascript-insight)
+Score: 0.5
+Value: Est savings of 7┬áKiB
+Details (First 3 items):
+[
+  {
+    "url": "https://unpkg.com/@splinetool/viewer@1.12.41/build/spline-viewer.js",
+    "wastedBytes": 7600,
+    "subItems": {
+      "type": "subitems",
+      "items": [
+        {
+          "signal": "Math.hypot",
+          "location": {
+            "type": "source-location",
+            "url": "https://unpkg.com/@splinetool/viewer@1.12.41/build/spline-viewer.js",
+            "urlProvider": "network",
+            "line": 22,
+            "column": 3582
+          }
+        }
+      ]
+    }
+  }
+]
+
+Audit: Network dependency tree (network-dependency-tree-insight)
+Score: 0
+Value: undefined
+Details (First 3 items):
+[
+  {
+    "type": "list-section",
+    "value": {
+      "type": "network-tree",
+      "chains": {
+        "33FAE8F3EBCB9A30159C19CC09C6FE13": {
+          "url": "http://localhost:5173/#home",
+          "navStartToEndTime": 121,
+          "transferSize": 16712,
+          "isLongest": true,
+          "children": {
+            "13108.14": {
+              "url": "https://unpkg.com/@splinetool/viewer@1.12.41/build/spline-viewer.js",
+              "navStartToEndTime": 494,
+              "transferSize": 652089,
+              "isLongest": true,
+              "children": {
+                "13108.69": {
+                  "url": "https://prod.spline.design/NHQad1vutWXl0SsM/scene.splinecode",
+                  "navStartToEndTime": 927,
+                  "transferSize": 1032229,
+                  "isLongest": true,
+                  "children": {}
+                },
+                "13108.66": {
+                  "url": "https://prod.spline.design/tZTCK4whAhp96r09/scene.splinecode",
+                  "navStartToEndTime": 671,
+                  "transferSize": 4573,
+                  "children": {}
+                }
+              }
+            },
+            "13108.7": {
+              "url": "https://fonts.googleapis.com/css2?family=BBH+Bogle&display=swap",
+              "navStartToEndTime": 410,
+              "transferSize": 766,
+              "children": {
+                "13108.59": {
+                  "url": "https://fonts.gstatic.com/s/bbhbogle/v1/GFDoWA58rVDJf-fOV9A7rJJdGg4xUQ.woff2",
+                  "navStartToEndTime": 591,
+                  "transferSize": 6723,
+                  "children": {}
+                }
+              }
+            },
+            "13108.3": {
+              "url": "http://localhost:5173/css/style.css",
+              "navStartToEndTime": 118,
+              "transferSize": 34424,
+              "children": {
+                "13108.42": {
+                  "url": "http://localhost:5173/MonumentExtended/MonumentExtended-Ultrabold.otf",
+                  "navStartToEndTime": 221,
+                  "transferSize": 33846,
+                  "children": {}
+                }
+              }
+            },
+            "13108.2": {
+              "url": "http://localhost:5173/@vite/client",
+              "navStartToEndTime": 122,
+              "transferSize": 179221,
+              "children": {
+                "13108.40": {
+                  "url": "http://localhost:5173/node_modules/vite/dist/client/env.mjs",
+                  "navStartToEndTime": 215,
+                  "transferSize": 3768,
+                  "children": {}
+                }
+              }
+            },
+            "13108.16": {
+              "url": "http://localhost:5173/spline-widget/spline-widget.js",
+              "navStartToEndTime": 123,
+              "transferSize": 144624,
+              "children": {}
+            },
+            "13108.15": {
+              "url": "http://localhost:5173/spline-widget/main.css",
+              "navStartToEndTime": 120,
+              "transferSize": 489,
+              "children": {}
+            }
+          }
+        }
+      },
+      "longestChain": {
+        "duration": 927
+      }
+    }
+  },
+  {
+    "type": "list-section",
+    "title": "Preconnected origins",
+    "description": "[preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.",
+    "value": {
+      "type": "table",
+      "headings": [
+        {
+          "key": "origin",
+          "valueType": "text",
+          "subItemsHeading": {
+            "key": "warning"
+          },
+          "label": "Origin"
+        },
+        {
+          "key": "source",
+          "valueType": "node",
+          "label": "Source"
+        }
+      ],
+      "items": [
+        {
+          "origin": "https://fonts.googleapis.com/",
+          "source": {
+            "type": "node",
+            "lhId": "page-7-LINK",
+            "path": "1,HTML,0,HEAD,11,LINK",
+            "selector": "head > link",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0,
+              "width": 0,
+              "height": 0
+            },
+            "snippet": "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" crossorigin=\"\">",
+            "nodeLabel": "head > link"
+          },
+          "subItems": {
+            "type": "subitems",
+            "items": [
+              {
+                "warning": "Unused preconnect. Check that the `crossorigin` attribute is used properly."
+              }
+            ]
+          }
+        },
+        {
+          "origin": "https://fonts.gstatic.com/",
+          "source": {
+            "type": "node",
+            "lhId": "page-8-LINK",
+            "path": "1,HTML,0,HEAD,12,LINK",
+            "selector": "head > link",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0,
+              "width": 0,
+              "height": 0
+            },
+            "snippet": "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin=\"\">",
+            "nodeLabel": "head > link"
+          },
+          "subItems": {
+            "type": "subitems",
+            "items": []
+          }
+        },
+        {
+          "origin": "https://cdn.boxicons.com/",
+          "source": {
+            "type": "node",
+            "lhId": "page-9-LINK",
+            "path": "1,HTML,0,HEAD,13,LINK",
+            "selector": "head > link",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0,
+              "width": 0,
+              "height": 0
+            },
+            "snippet": "<link rel=\"preconnect\" href=\"https://cdn.boxicons.com\">",
+            "nodeLabel": "head > link"
+          },
+          "subItems": {
+            "type": "subitems",
+            "items": []
+          }
+        },
+        {
+          "origin": "https://cdnjs.cloudflare.com/",
+          "source": {
+            "type": "node",
+            "lhId": "page-10-LINK",
+            "path": "1,HTML,0,HEAD,14,LINK",
+            "selector": "head > link",
+            "boundingRect": {
+              "top": 0,
+              "bottom": 0,
+              "left": 0,
+              "right": 0,
+              "width": 0,
+              "height": 0
+            },
+            "snippet": "<link rel=\"preconnect\" href=\"https://cdnjs.cloudflare.com\">",
+            "nodeLabel": "head > link"
+          },
+          "subItems": {
+            "type": "subitems",
+            "items": [
+              {
+                "warning": "Unused preconnect. Check that the `crossorigin` attribute is used properly."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "type": "list-section",
+    "title": "Preconnect candidates",
+    "description": "Add [preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints to your most important origins, but try to use no more than 4.",
+    "value": {
+      "type": "table",
+      "headings": [
+        {
+          "key": "origin",
+          "valueType": "text",
+          "label": "Origin"
+        },
+        {
+          "key": "wastedMs",
+          "valueType": "ms",
+          "label": "Est LCP savings"
+        }
+      ],
+      "items": [
+        {
+          "origin": "https://fonts.googleapis.com",
+          "wastedMs": 271.508
+        },
+        {
+          "origin": "https://cdnjs.cloudflare.com",
+          "wastedMs": 116.844
+        }
+      ]
+    }
+  }
+]
+
+Audit: Render blocking requests (render-blocking-insight)
+Score: 0
+Value: Est savings of 80┬áms
+Details (First 3 items):
+[
+  {
+    "url": "https://fonts.googleapis.com/css2?family=BBH+Bogle&display=swap",
+    "totalBytes": 766,
+    "wastedMs": 517
+  },
+  {
+    "url": "http://localhost:5173/css/style.css",
+    "totalBytes": 34424,
+    "wastedMs": 168
+  }
+]
