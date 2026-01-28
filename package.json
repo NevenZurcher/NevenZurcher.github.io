@@ -9,6 +9,7 @@
   "dependencies": {
     "@coreui/icons": "^3.0.1",
     "@splinetool/react-spline": "^4.1.0",
+    "@vercel/analytics": "^1.6.1",
     "sharp": "^0.34.5",
     "vite": "^7.3.1"
   },

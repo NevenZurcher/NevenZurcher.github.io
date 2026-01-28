@@ -1,5 +1,6 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
+import { Analytics } from "@vercel/analytics/react"
 import SplineScene from './SplineScene'
 import './styles.css'
 
@@ -13,7 +14,12 @@ function mount() {
   }
 
   const root = createRoot(container)
-  root.render(<SplineScene />)
+  root.render(
+    <>
+      <SplineScene />
+      <Analytics />
+    </>
+  )
 }
 
 if (document.readyState === 'loading') {
