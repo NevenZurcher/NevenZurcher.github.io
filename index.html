@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neven Zurcher | Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="weather-canvas"></canvas>
+
+    <div id="preloader">
+        <video id="preloader-video" autoplay muted playsinline>
+            <source src="assets/loading.webm" type="video/webm">
+            <source src="assets/loading.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <div class="bg-mesh">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <a href="#" class="site-logo">
+        <img src="assets/nzlogo.svg" alt="Neven Zurcher Logo">
+    </a>
+
+    <nav class="liquid-nav" id="nav">
+        <div class="liquid-glare-container">
+            <div class="liquid-glare" id="glare"></div>
+        </div>
+        <div class="nav-items">
+            <div class="active-pill" id="active-pill"></div>
+
+            <button class="nav-btn active" data-target="0">
+                <div class="btn-content">
+                    <span>HOME</span>
+                </div>
+            </button>
+            <button class="nav-btn" data-target="1">
+                <div class="btn-content">
+                    <span>ABOUT</span>
+                </div>
+            </button>
+            <button class="nav-btn" data-target="2">
+                <div class="btn-content">
+                    <span>EXPERIENCE</span>
+                </div>
+            </button>
+            <button class="nav-btn" data-target="3">
+                <div class="btn-content">
+                    <span>PROJECTS</span>
+                </div>
+            </button>
+        </div>
+    </nav>
+    <a href="#" class="contact-btn">CONTACT</a>
+
+    <div id="cloud-overlay">
+        <div class="cloud-layer" id="cloud-bg" style="background-image: url('assets/clouds/background-fog.png');"></div>
+        <div class="cloud-layer" id="cloud-mid" style="background-image: url('assets/clouds/midground-clouds.png');">
+        </div>
+        <div class="cloud-layer" id="cloud-fg" style="background-image: url('assets/clouds/foreground-cloud.png');">
+        </div>
+    </div>
+
+    <div class="pin-container">
+
+        <!-- Background Images -->
+        <div class="backgrounds">
+            <div class="bg-layer" id="bg-projects" style="background-image: url('assets/projects.jpeg'); z-index: 1;">
+            </div>
+            <div class="bg-layer" id="bg-experience"
+                style="background-image: url('assets/experience.png'); z-index: 3;"></div>
+            <div class="bg-layer" id="bg-about" style="background-image: url('assets/about.jpg'); z-index: 5;">
+            </div>
+            <div class="bg-layer" id="fg-about" style="background-image: url('assets/bigForeground.png'); z-index: 7;">
+            </div>
+            <div class="bg-layer" id="close-fg-about"
+                style="background-image: url('assets/closeForeground.png'); z-index: 8;">
+            </div>
+            <div class="bg-layer" id="bg-hero" style="background-image: url('assets/home.jpeg'); z-index: 9;"></div>
+        </div>
+
+        <!-- Content Overlay -->
+        <div class="content-wrapper">
+
+            <section class="section" id="section-hero" style="z-index: 10;">
+                <div class="hero-container">
+                    <h1 class="hero-bg-text">
+                        <span>NEVEN</span>
+                        <span>ZURCHER</span>
+                    </h1>
+                    <img src="assets/nzlogo_alt.svg" class="hero-logo-overlay" alt="NZ Logo">
+                    <p class="hero-subtitle">Full-Stack Application Engineer & UI/UX Specialist</p>
+                </div>
+            </section>
+
+            <section class="section" id="section-about" style="z-index: 6;">
+                <div class="content-card">
+                    <h2>About Me</h2>
+                    <p>I am passionate in Web and Software Development, studying Computer Science at Drexel University's
+                        College of Computing & Informatics with a growing interest in AI Technology. I am eager to
+                        contribute to impactful software solutions that blend user-focused design with intelligent
+                        automation, helping shape the future of tech-driven innovation. </p>
+                </div>
+            </section>
+
+            <section class="section" id="section-experience" style="z-index: 4;">
+                <div class="content-card">
+                    <h2>Experience</h2>
+
+                    <div class="experience-timeline">
+                        <div class="timeline-item">
+                            <h3>Vanguard</h3>
+                            <p>Application Engineer Co-op</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>XyZed</h3>
+                            <p>CTO & Lead Web Development Engineer</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Target</h3>
+                            <p>Specialty Sales (Tech)</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>TJX Companies</h3>
+                            <p>Store Associate</p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="section-projects" style="z-index: 2;">
+                <div class="content-card project-card">
+                    <h2>Projects</h2>
+                    <div class="project-item">
+                        <h3>EcoSnap</h3>
+                        <p>A functional sustainability web application developed for Devpost, featuring custom UI design
+                            and environmental tracking.</p>
+                    </div>
+                    <div class="project-item">
+                        <h3>Academic Planning Tool</h3>
+                        <p>A custom course schedule application utilizing the Model Context Protocol (MCP) to securely
+                            connect local servers with university DegreeWorks data.</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- GSAP & Plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+    <script src="weather.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>

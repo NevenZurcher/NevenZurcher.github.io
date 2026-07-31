@@ -1,0 +1,4 @@
+node_modules/
+temp-liquid-glass/
+.env
+.DS_Store
