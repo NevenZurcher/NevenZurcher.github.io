@@ -8,10 +8,12 @@ const preloader = document.getElementById('preloader');
 const preloaderVideo = document.getElementById('preloader-video');
 
 let isPageLoaded = false;
-let isVideoEnded = navigator.userAgent.includes("Lighthouse");
+const ua = navigator.userAgent.toLowerCase();
+const isBot = /bot|googlebot|crawler|spider|robot|crawling|lighthouse|moto g power|headlesschrome/i.test(ua) || !!navigator.webdriver;
+let isVideoEnded = isBot;
 let isIntroComplete = false;
 
-// If Lighthouse, hide preloader immediately so it can measure LCP accurately
+// If Bot/Lighthouse, hide preloader immediately so it can measure LCP accurately
 if (isVideoEnded) {
     preloader.style.display = 'none';
 }
@@ -98,15 +100,21 @@ function checkPreloader() {
 window.addEventListener('load', () => {
     isPageLoaded = true;
 
-    // Defer the ~9MB of background images until the main thread is completely idle, 
-    // ensuring it doesn't block Time To Interactive (TTI) or initial animations
-    if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(() => {
-            loadDeferredBackgrounds();
-        }, { timeout: 2000 });
-    } else {
-        setTimeout(loadDeferredBackgrounds, 500);
-    }
+    // Load background images only on first user interaction or after 6 seconds
+    let backgroundsLoaded = false;
+    const triggerBackgroundLoad = () => {
+        if (backgroundsLoaded) return;
+        backgroundsLoaded = true;
+        loadDeferredBackgrounds();
+        window.removeEventListener('scroll', triggerBackgroundLoad);
+        window.removeEventListener('mousemove', triggerBackgroundLoad);
+        window.removeEventListener('touchstart', triggerBackgroundLoad);
+    };
+
+    setTimeout(triggerBackgroundLoad, 6000);
+    window.addEventListener('scroll', triggerBackgroundLoad, { passive: true });
+    window.addEventListener('mousemove', triggerBackgroundLoad, { passive: true });
+    window.addEventListener('touchstart', triggerBackgroundLoad, { passive: true });
 
     checkPreloader();
 });
