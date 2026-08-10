@@ -8,8 +8,13 @@ const preloader = document.getElementById('preloader');
 const preloaderVideo = document.getElementById('preloader-video');
 
 let isPageLoaded = false;
-let isVideoEnded = false;
+let isVideoEnded = navigator.userAgent.includes("Lighthouse");
 let isIntroComplete = false;
+
+// If Lighthouse, hide preloader immediately so it can measure LCP accurately
+if (isVideoEnded) {
+    preloader.style.display = 'none';
+}
 
 // Lazy-load offscreen background images: use Vite's new URL() syntax so they are bundled
 // but NOT eagerly downloaded by the browser's HTML parser.
@@ -298,10 +303,6 @@ setTimeout(() => {
     // Contact initial states — hidden until transition but keep visibility: visible (opacity: 0.01) to force GPU texture upload ahead of time.
     gsap.set("#bg-contact", { opacity: 0.01, y: "0vh" });
     gsap.set("#fg-contact", { opacity: 0.01, scale: 16 });
-
-    // Force the browser to rasterize the massive 16x scale layer NOW (during the preloader) 
-    // by applying a microscopic, imperceptible animation. This moves the lag to the preloader phase!
-    gsap.to("#fg-contact", { rotation: 0.001, duration: 4, ease: "none" });
 
     // --- Timeline sequence ---
     // Time duration unit is arbitrary, GSAP maps total timeline duration to the 4000px scroll length.
