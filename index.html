@@ -4,22 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neven Zurcher | Portfolio</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap"
-        rel="stylesheet">
+    <title>Neven Zurcher</title>
+    <link rel="icon" type="image/svg+xml" href="assets/nzlogo.svg">
+    <!-- Preload only the hero background (first visible image) -->
+    <link rel="preload" as="image" href="assets/home/home.webp" fetchpriority="high">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- GSAP & Plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js" defer></script>
 </head>
 
 <body>
     <canvas id="weather-canvas"></canvas>
 
     <div id="preloader">
-        <video id="preloader-video" autoplay muted playsinline>
+        <video id="preloader-video" autoplay muted playsinline width="400" height="400">
             <source src="assets/loading.webm" type="video/webm">
-            <source src="assets/loading.mp4" type="video/mp4">
+            <source src="assets/loading.webm" type="video/mp4">
         </video>
     </div>
 
@@ -29,8 +32,10 @@
         <div class="blob blob-3"></div>
     </div>
 
+    <div class="top-vignette"></div>
+
     <a href="#" class="site-logo">
-        <img src="assets/nzlogo.svg" alt="Neven Zurcher Logo">
+        <img src="assets/nzlogo.svg" alt="Neven Zurcher Logo" width="84" height="84">
     </a>
 
     <nav class="liquid-nav" id="nav">
@@ -65,10 +70,14 @@
     <a href="#" class="contact-btn">CONTACT</a>
 
     <div id="cloud-overlay">
-        <div class="cloud-layer" id="cloud-bg" style="background-image: url('assets/clouds/background-fog.png');"></div>
-        <div class="cloud-layer" id="cloud-mid" style="background-image: url('assets/clouds/midground-clouds.png');">
+        <div class="cloud-layer" id="cloud-bg"
+            style="background-image: url('assets/home/clouds/background-fog.png'); background-image: -webkit-image-set(url('assets/home/clouds/background-fog.webp') 1x, url('assets/home/clouds/background-fog.png') 1x); background-image: image-set(url('assets/home/clouds/background-fog.webp') type('image/webp'), url('assets/home/clouds/background-fog.png') type('image/png'));">
         </div>
-        <div class="cloud-layer" id="cloud-fg" style="background-image: url('assets/clouds/foreground-cloud.png');">
+        <div class="cloud-layer" id="cloud-mid"
+            style="background-image: url('assets/home/clouds/midground-clouds.png'); background-image: -webkit-image-set(url('assets/home/clouds/midground-clouds.webp') 1x, url('assets/home/clouds/midground-clouds.png') 1x); background-image: image-set(url('assets/home/clouds/midground-clouds.webp') type('image/webp'), url('assets/home/clouds/midground-clouds.png') type('image/png'));">
+        </div>
+        <div class="cloud-layer" id="cloud-fg"
+            style="background-image: url('assets/home/clouds/foreground-cloud.png'); background-image: -webkit-image-set(url('assets/home/clouds/foreground-cloud.webp') 1x, url('assets/home/clouds/foreground-cloud.png') 1x); background-image: image-set(url('assets/home/clouds/foreground-cloud.webp') type('image/webp'), url('assets/home/clouds/foreground-cloud.png') type('image/png'));">
         </div>
     </div>
 
@@ -76,18 +85,23 @@
 
         <!-- Background Images -->
         <div class="backgrounds">
-            <div class="bg-layer" id="bg-projects" style="background-image: url('assets/projects.jpeg'); z-index: 1;">
+            <div class="bg-layer" id="bg-contact" style="z-index: 0;">
             </div>
-            <div class="bg-layer" id="bg-experience"
-                style="background-image: url('assets/experience.png'); z-index: 3;"></div>
-            <div class="bg-layer" id="bg-about" style="background-image: url('assets/about.jpg'); z-index: 5;">
+            <div class="bg-layer" id="bg-projects" style="z-index: 1;">
             </div>
-            <div class="bg-layer" id="fg-about" style="background-image: url('assets/bigForeground.png'); z-index: 7;">
+            <div class="bg-layer" id="fg-contact" style="z-index: 2;">
             </div>
-            <div class="bg-layer" id="close-fg-about"
-                style="background-image: url('assets/closeForeground.png'); z-index: 8;">
+            <div class="bg-layer" id="bg-experience" style="z-index: 3;"></div>
+            <div class="bg-layer" id="fg-experience" style="z-index: 5;">
             </div>
-            <div class="bg-layer" id="bg-hero" style="background-image: url('assets/home.jpeg'); z-index: 9;"></div>
+            <div class="bg-layer" id="bg-about" style="z-index: 5;">
+            </div>
+            <div class="bg-layer" id="fg-about" style="z-index: 7;">
+            </div>
+            <div class="bg-layer" id="close-fg-about" style="z-index: 8;">
+            </div>
+            <div class="bg-layer" id="bg-hero" style="background-image: url('assets/home/home.webp'); z-index: 9;">
+            </div>
         </div>
 
         <!-- Content Overlay -->
@@ -99,7 +113,7 @@
                         <span>NEVEN</span>
                         <span>ZURCHER</span>
                     </h1>
-                    <img src="assets/nzlogo_alt.svg" class="hero-logo-overlay" alt="NZ Logo">
+                    <img src="assets/nzlogo_alt.svg" class="hero-logo-overlay" alt="NZ Logo" width="450" height="450">
                     <p class="hero-subtitle">Full-Stack Application Engineer & UI/UX Specialist</p>
                 </div>
             </section>
@@ -115,43 +129,225 @@
             </section>
 
             <section class="section" id="section-experience" style="z-index: 4;">
-                <div class="content-card">
-                    <h2>Experience</h2>
-
-                    <div class="experience-timeline">
-                        <div class="timeline-item">
+                <div class="experience-carousel">
+                    <div class="static-brackets" id="experience-brackets"></div>
+                    <div class="experience-track" id="experience-track">
+                        <div class="content-card experience-card no-brackets">
+                            <img src="assets/experience/vanguard.svg" alt="Vanguard Logo" class="experience-logo" width="100" height="60" loading="lazy">
                             <h3>Vanguard</h3>
-                            <p>Application Engineer Co-op</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h3>XyZed</h3>
-                            <p>CTO & Lead Web Development Engineer</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h3>Target</h3>
-                            <p>Specialty Sales (Tech)</p>
-                        </div>
-                        <div class="timeline-item">
-                            <h3>TJX Companies</h3>
-                            <p>Store Associate</p>
-                        </div>
+                            <div class="badge-container">
+                                <p class="experience-badge">Application Engineer Co-op</p>
+                                <div class="date-location-badges">
+                                    <p class="experience-badge date-badge">Malvern, PA</p>
+                                    <p class="experience-badge date-badge">March 2026 - Present</p>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>Developing full-stack applications in an Agile environment with
+                                    Angular microfrontends and Node.js/TypeScript BFFs to power time-sensitive
+                                    retirement rollover transactions</li>
+                                <li>Constructing serverless AWS cloud solutions, orchestrating resilient workflows using
+                                    Step Functions, Lambda, SQS, and multi-region deployments for high-availability
+                                    money movement</li>
+                                <li>Optimizing GitHub CI/CD delivery pipelines, integrating automated unit and E2E
+                                    testing frameworks (Playwright, Cucumber, JUnit) to ensure robust production
+                                    releases</li>
 
+                            </ul>
+                        </div>
+                        <div class="content-card experience-card no-brackets">
+                            <picture>
+                                <source srcset="assets/experience/XyZed.webp" type="image/webp"><img
+                                    src="assets/experience/XyZed.webp" alt="XyZed Logo" class="experience-logo"
+                                    width="100" height="60" loading="lazy">
+                            </picture>
+                            <h3>XyZed</h3>
+                            <div class="badge-container">
+                                <p class="experience-badge">CTO & Lead Web Development Engineer</p>
+                                <div class="date-location-badges">
+                                    <p class="experience-badge date-badge">Coatesville, PA</p>
+                                    <p class="experience-badge date-badge">July 2025 - Present</p>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>Architecting and building a high-performance web platform from scratch for a medical
+                                    animation studio, leveraging React, JavaScript, and modern web standards</li>
+                                <li>Engineering interactive 3D scenes and cinematic visual sequences using React Three
+                                    Fiber (R3F) and GSAP, elevating visual storytelling for complex medical concepts
+                                    while maintaining 60 FPS performance</li>
+                                <li>Directing technical execution from UI/UX design to deployment, establishing
+                                    repository workflows, asset optimization pipelines, and scalable code architecture
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="content-card experience-card no-brackets">
+                            <picture>
+                                <source srcset="assets/experience/target.webp" type="image/webp"><img
+                                    src="assets/experience/target.webp" alt="Target Logo" class="experience-logo"
+                                    width="100" height="60" loading="lazy">
+                            </picture>
+                            <h3>Target</h3>
+                            <div class="badge-container">
+                                <p class="experience-badge">Specialty Sales (Tech)</p>
+                                <div class="date-location-badges">
+                                    <p class="experience-badge date-badge">Eagleview, PA</p>
+                                    <p class="experience-badge date-badge">Oct. 2023 - June 2026</p>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>Onboarded and trained 5+ new team members on product technical specs, sales
+                                    strategies, and store software systems, accelerating team ramp-up time</li>
+                                <li>Served as subject matter expert on consumer technology (smart home, audio/visual
+                                    systems, gaming), diagnosing customer technical issues and delivering tailored
+                                    solutions</li>
+                                <li>Managed inventory accuracy and stock flow for high-demand electronics, analyzing
+                                    inventory turnover to optimize shelf availability and reduce shrink</li>
+                            </ul>
+                        </div>
+                        <div class="content-card experience-card no-brackets">
+                            <picture>
+                                <source srcset="assets/experience/tjx.webp" type="image/webp"><img
+                                    src="assets/experience/tjx.webp" alt="TJX Companies Logo" class="experience-logo"
+                                    width="100" height="60" loading="lazy">
+                            </picture>
+                            <h3>TJX Companies</h3>
+                            <div class="badge-container">
+                                <p class="experience-badge">Store Associate</p>
+                                <div class="date-location-badges">
+                                    <p class="experience-badge date-badge">Parkesburg, PA</p>
+                                    <p class="experience-badge date-badge">Aug. 2022 - Sept. 2023</p>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>Optimized supply chain workflow by unloading, sorting, and processing high-volume
+                                    freight shipments under strict daily turn-around deadlines</li>
+                                <li>Collaborated with floor leadership to monitor inventory levels and streamline the
+                                    replenishment of high-demand merchandise</li>
+                                <li>Delivered attentive customer support on the sales floor, efficiently resolving
+                                    product inquiries and maintaining a well-organized store layout</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section class="section" id="section-projects" style="z-index: 2;">
-                <div class="content-card project-card">
-                    <h2>Projects</h2>
-                    <div class="project-item">
-                        <h3>EcoSnap</h3>
-                        <p>A functional sustainability web application developed for Devpost, featuring custom UI design
-                            and environmental tracking.</p>
+                <div class="projects-deck">
+                    <!-- Cards are placed in reverse order so the last one in the DOM is on top of the visual stack -->
+
+                    <!-- Card 5 -->
+                    <div class="content-card project-trading-card" id="project-card-5">
+                        <div class="card-banner" style="background-image: url('assets/projects/SF.webp');"></div>
+                        <div class="card-body">
+                            <h3>SwiftFillAI</h3>
+                            <p class="role-badge">DragonHacks 2025</p>
+                            <p class="card-desc">A Chrome extension that uses AI to analyze screens and autofill
+                                financial
+                                forms in real time, combining natural language processing, a built-in chatbot, and a
+                                strong focus on automation, privacy, and ease of use.</p>
+                            <div class="card-actions">
+                                <a href="https://github.com/NevenZurcher/SwiftFillAI" class="btn-primary"
+                                    target="_blank" rel="noopener">GitHub</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="project-item">
-                        <h3>Academic Planning Tool</h3>
-                        <p>A custom course schedule application utilizing the Model Context Protocol (MCP) to securely
-                            connect local servers with university DegreeWorks data.</p>
+
+                    <!-- Card 4 -->
+                    <div class="content-card project-trading-card" id="project-card-4">
+                        <div class="card-banner"
+                            style="background-image: url('assets/projects/SS.webp'); background-image: -webkit-image-set(url('assets/projects/SS.webp') 1x, url('assets/projects/SS.webp') 1x); background-image: image-set(url('assets/projects/SS.webp') type('image/webp'), url('assets/projects/SS.webp') type('image/png'));">
+                        </div>
+                        <div class="card-body">
+                            <h3>StockStalker</h3>
+                            <p class="role-badge">Class Project</p>
+                            <p class="card-desc">A web-based stock market platform that makes investing approachable
+                                with real-time and historical data, personalized portfolio tracking, and risk-free paper
+                                trading.</p>
+                            <div class="card-actions">
+                                <a href="https://stockstalker.vercel.app/" class="btn-primary" target="_blank"
+                                    rel="noopener">View Web</a>
+                                <a href="https://github.com/NevenZurcher/StockStalker" class="btn-secondary"
+                                    target="_blank" rel="noopener">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="content-card project-trading-card" id="project-card-3">
+                        <div class="card-banner"
+                            style="background-image: url('assets/projects/xyz.webp'); background-image: -webkit-image-set(url('assets/projects/xyz.webp') 1x, url('assets/projects/xyz.webp') 1x); background-image: image-set(url('assets/projects/xyz.webp') type('image/webp'), url('assets/projects/xyz.webp') type('image/png'));">
+                        </div>
+                        <div class="card-body">
+                            <h3>XyZed</h3>
+                            <p class="role-badge">Lead Web Developer</p>
+                            <p class="card-desc">A high-performance web platform for a medical animation studio,
+                                transforming complex concepts into immersive experiences with interactive 3D scenes and
+                                cinematic storytelling.</p>
+                            <div class="card-actions">
+                                <a href="https://www.xyzed.art" class="btn-primary" target="_blank" rel="noopener">View
+                                    Web</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="content-card project-trading-card" id="project-card-2">
+                        <div class="card-banner" style="background-image: url('assets/projects/ES.webp');"></div>
+                        <div class="card-body">
+                            <h3>EcoSnap</h3>
+                            <p class="role-badge">HackPrinceton 2025</p>
+                            <p class="card-desc">An AI-powered sustainability app that lets users document pollution
+                                and biodiversity with photos, transforming everyday observations into crowdsourced,
+                                research-ready environmental data.</p>
+                            <div class="card-actions">
+                                <a href="https://github.com/NevenZurcher/EcoSnap" class="btn-primary" target="_blank"
+                                    rel="noopener">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 1 (Top of Stack) -->
+                    <div class="content-card project-trading-card" id="project-card-1">
+                        <div class="card-banner"
+                            style="background-image: url('assets/projects/DG.webp'); background-image: -webkit-image-set(url('assets/projects/DG.webp') 1x, url('assets/projects/DG.webp') 1x); background-image: image-set(url('assets/projects/DG.webp') type('image/webp'), url('assets/projects/DG.webp') type('image/png'));">
+                        </div>
+                        <div class="card-body">
+                            <h3>DrexelGuessr</h3>
+                            <p class="role-badge">Personal Project</p>
+                            <p class="card-desc">A location-based guessing game that challenges
+                                players to identify specific spots on Drexel's campus using a street view shot and
+                                limited contextual clues.</p>
+                            <div class="card-actions">
+                                <a href="https://drexelguessr.vercel.app/" class="btn-primary" target="_blank"
+                                    rel="noopener">View Web</a>
+                                <a href="https://github.com/NevenZurcher/DrexelGuessr" class="btn-secondary"
+                                    target="_blank" rel="noopener">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="section" id="section-contact" style="z-index: 2;">
+                <div class="content-card contact-card">
+                    <h2>Let's Connect</h2>
+                    <p>I'm always open to new opportunities, collaborations, and conversations. Feel free to reach out!
+                    </p>
+                    <div class="contact-links">
+                        <a href="mailto:nevenzurcher@gmail.com" class="contact-link">
+                            <span class="contact-link-label">Email</span>
+                            <span class="contact-link-value">nevenzurcher@gmail.com</span>
+                        </a>
+                        <a href="https://linkedin.com/in/nevenzurcher" target="_blank" rel="noopener"
+                            class="contact-link">
+                            <span class="contact-link-label">LinkedIn</span>
+                            <span class="contact-link-value">linkedin.com/in/nevenzurcher</span>
+                        </a>
+                        <a href="https://github.com/NevenZurcher" target="_blank" rel="noopener" class="contact-link">
+                            <span class="contact-link-label">GitHub</span>
+                            <span class="contact-link-value">github.com/NevenZurcher</span>
+                        </a>
                     </div>
                 </div>
             </section>
@@ -159,12 +355,8 @@
         </div>
     </div>
 
-    <!-- GSAP & Plugins -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
-    <script src="weather.js"></script>
-    <script src="main.js"></script>
+    <script type="module" src="weather.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
 
 </html>
