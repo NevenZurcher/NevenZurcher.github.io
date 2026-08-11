@@ -494,11 +494,7 @@ setTimeout(() => {
     tl.to("#fg-contact", { scale: 4, duration: 1.4, ease: "power2.inOut" }, 9.5);
 
     // Contact card fades in while foreground is still settling
-    tl.fromTo("#section-contact .content-card",
-        { y: 60, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" },
-        10.7
-    );
+    tl.to(contactCard, { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, 10.7);
 
 }, 0); // End of deferred GSAP timeline setup
 
