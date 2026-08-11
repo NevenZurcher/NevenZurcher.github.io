@@ -30,10 +30,21 @@ const deferredBackgrounds = {
     'close-fg-about': new URL('./assets/about/closeForeground.webp', import.meta.url).href
 };
 
-function loadDeferredBackgrounds() {
+async function loadDeferredBackgrounds() {
     for (const [id, url] of Object.entries(deferredBackgrounds)) {
-        const el = document.getElementById(id);
-        if (el) el.style.backgroundImage = `url(${url})`;
+        try {
+            const img = new Image();
+            img.src = url;
+            await img.decode();
+            const el = document.getElementById(id);
+            if (el) el.style.backgroundImage = `url(${url})`;
+        } catch (e) {
+            // Fallback if decode fails or is unsupported
+            const el = document.getElementById(id);
+            if (el) el.style.backgroundImage = `url(${url})`;
+        }
+        // Yield to the main thread and allow time between decodes
+        await new Promise(r => setTimeout(r, 100));
     }
 }
 
@@ -100,21 +111,11 @@ function checkPreloader() {
 window.addEventListener('load', () => {
     isPageLoaded = true;
 
-    // Load background images only on first user interaction or after 6 seconds
-    let backgroundsLoaded = false;
-    const triggerBackgroundLoad = () => {
-        if (backgroundsLoaded) return;
-        backgroundsLoaded = true;
+    // Start loading background images sequentially after page load
+    // so they are ready before the user starts scrolling
+    setTimeout(() => {
         loadDeferredBackgrounds();
-        window.removeEventListener('scroll', triggerBackgroundLoad);
-        window.removeEventListener('mousemove', triggerBackgroundLoad);
-        window.removeEventListener('touchstart', triggerBackgroundLoad);
-    };
-
-    setTimeout(triggerBackgroundLoad, 6000);
-    window.addEventListener('scroll', triggerBackgroundLoad, { passive: true });
-    window.addEventListener('mousemove', triggerBackgroundLoad, { passive: true });
-    window.addEventListener('touchstart', triggerBackgroundLoad, { passive: true });
+    }, 1000);
 
     checkPreloader();
 });

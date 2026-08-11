@@ -8,10 +8,7 @@
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
 
-    /* Liquid Nav Blobs */
-    --blob-1: #ff85a1;
-    --blob-2: #ffb885;
-    --blob-3: #8a2be2;
+
     --card-bg: rgba(15, 17, 21, 0.65);
 }
 
@@ -657,7 +654,7 @@ p {
     background-repeat: no-repeat;
     transform: translateY(100vh);
     /* Start hidden below the viewport */
-    will-change: transform, scale;
+    will-change: transform;
     opacity: 75%;
 }
 
@@ -680,67 +677,6 @@ p {
     }
 }
 
-/* Liquid Navigation Background Mesh */
-.bg-mesh {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-    filter: blur(80px);
-    opacity: 0.4;
-}
-
-.blob {
-    position: absolute;
-    border-radius: 50%;
-    animation: float 20s infinite ease-in-out alternate;
-}
-
-.blob-1 {
-    width: 50vw;
-    height: 50vw;
-    top: -10%;
-    left: -10%;
-    background: var(--blob-1);
-    animation-delay: 0s;
-}
-
-.blob-2 {
-    width: 45vw;
-    height: 45vw;
-    bottom: -10%;
-    right: -10%;
-    background: var(--blob-2);
-    animation-delay: -5s;
-}
-
-.blob-3 {
-    width: 35vw;
-    height: 35vw;
-    top: 30%;
-    left: 40%;
-    background: var(--blob-3);
-    animation-delay: -10s;
-}
-
-@keyframes float {
-    0% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
-    }
-
-    33% {
-        transform: translate(5%, 10%) scale(1.05) rotate(5deg);
-    }
-
-    66% {
-        transform: translate(-5%, 5%) scale(0.95) rotate(-5deg);
-    }
-
-    100% {
-        transform: translate(0, -10%) scale(1.1) rotate(0deg);
-    }
-}
 
 /* Liquid Navigation */
 .liquid-nav {
@@ -1385,3 +1321,4 @@ p {
         transform: translateX(var(--deck-x, 0px));
     }
 }
+
