@@ -238,7 +238,8 @@ body {
     width: 100%;
     pointer-events: auto;
     /* Enable clicks on the card itself */
-    will-change: transform, opacity;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .content-card ul {
