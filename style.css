@@ -240,6 +240,9 @@ body {
     /* Enable clicks on the card itself */
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    contain: paint;
 }
 
 .content-card ul {
